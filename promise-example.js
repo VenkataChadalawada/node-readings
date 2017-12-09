@@ -52,4 +52,22 @@ Promise {<pending>}
 VM5465:4 functional error Arguments should be numbers
 */
 
+//ex4 parallel async using promise.all
+function randomResolve(name) {
+  return new Promise(resolve => setTimeout(() => {
+    console.log(name);
+    resolve();
+  }, 100 * Math.random()));
+}
+
+Promise.all([ 
+    randomResolve(1),
+    randomResolve(2),
+    randomResolve(3),
+    randomResolve(4),
+])
+.then(function(){
+    console.log("All Done!")
+})
+
 
