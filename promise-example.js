@@ -1,3 +1,4 @@
+//PROMISES - prmoises are more composable than callbacks
 //ex 1
 let abc = new Promise((resolve,reject) => {
   resolve('success')
@@ -28,9 +29,9 @@ asyncAdd(5,8).then((response)=>{
 
 //ex3 Synchronous one after other get first result use to for second
 let SyncMulti = (a,b) => {
-  return new Promise((resolve,request) => {
-    setTimeOut(()=>{
-      if(typeOf(a)==number&&typeOf(b)==number){
+  return new Promise((resolve,reject) => {
+    setTimeout(()=>{
+      if(typeof a==='number'&& typeof b==='number'){
         resolve(a+b);
       } else {
         reject('Arguments should be numbers');
@@ -39,12 +40,16 @@ let SyncMulti = (a,b) => {
   });
 }
 
-SyncMulti(5,8).then((response)=>{
-  return SyncMulti(response,'33');
-},(error)=>{
-  console.log('error is', error);
-}).then((afterResult)=>{
-  console.log('afterResult is-',afterResult);
-}, (errorAfter)=>{
-  console.log('-----error',errorAfter);
+SyncMulti4(5,7).then((res) => {
+    return SyncMulti4(res,33);
+}).then((res2)=>{
+  return SyncMulti4(res2, '33');
+}).catch((error) => {
+    console.log('functional error', error);
 });
+/*output if anyone fails it goes to catch and errors out
+Promise {<pending>}
+VM5465:4 functional error Arguments should be numbers
+*/
+
+
