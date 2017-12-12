@@ -1,3 +1,15 @@
+//CallBacks & promises
+var abc = (id, callback) =>{
+  var user = {
+    id:id,
+    name:'Sherlock'
+  }
+  callback(user);
+};
+abc(31, (usr) =>{
+  console.log('---we callbacked after that--',usr);
+});
+
 //PROMISES - prmoises are more composable than callbacks
 //ex 1
 let abc = new Promise((resolve,reject) => {
